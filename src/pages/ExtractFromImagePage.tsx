@@ -1,9 +1,8 @@
-
 import React, { useState, ChangeEvent } from 'react';
 import { Upload, FileImage } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import ColorSwatch from '@/components/ColorSwatch';
-import { Color } from '@/data/palettes';
+import { Color } from '@/types/palette';
 
 const ExtractFromImagePage = () => {
   const [colors, setColors] = useState<Color[]>([]);

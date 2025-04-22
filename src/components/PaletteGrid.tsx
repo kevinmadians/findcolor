@@ -1,7 +1,7 @@
 
 import React from 'react';
 import ColorCard from './ColorCard';
-import { Palette } from '@/data/palettes';
+import { Palette } from '@/types/palette';
 
 interface PaletteGridProps {
   palettes: Palette[];

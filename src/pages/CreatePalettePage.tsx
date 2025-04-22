@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import { Plus, Trash, Upload } from 'lucide-react';
-import { Color } from '@/data/palettes';
+import { Color } from '@/types/palette';
 
 const MAX_COLORS = 5;
 
@@ -25,13 +24,11 @@ const CreatePalettePage: React.FC = () => {
     tags: '',
   });
 
-  // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Add current color to the palette
   const addColor = () => {
     if (colors.length < MAX_COLORS) {
       setColors(prev => [...prev, { hex: currentColor }]);
@@ -39,19 +36,16 @@ const CreatePalettePage: React.FC = () => {
     }
   };
 
-  // Remove a color from the palette
   const removeColor = (index: number) => {
     setColors(colors.filter((_, i) => i !== index));
   };
 
-  // Update a color in the palette
   const updateColor = (index: number, hex: string) => {
     const newColors = [...colors];
     newColors[index] = { hex };
     setColors(newColors);
   };
 
-  // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert(`Palette "${formData.title}" created successfully!`);

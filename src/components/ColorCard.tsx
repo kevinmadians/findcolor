@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Palette } from '@/data/palettes';
+import { Palette } from '@/types/palette';
 import { Copy, Heart } from 'lucide-react';
 
 interface ColorCardProps {

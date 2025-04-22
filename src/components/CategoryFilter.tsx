@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { categories } from '@/data/palettes';
+import { categories } from '@/data/categories';
 
 interface CategoryFilterProps {
   selectedCategory: string;

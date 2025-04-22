@@ -4,7 +4,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PaletteGrid from '@/components/PaletteGrid';
 import CategoryFilter from '@/components/CategoryFilter';
-import { palettes, Palette } from '@/data/palettes';
+import { palettes } from '@/data/palettes';
+import { Palette } from '@/types/palette';
 
 const HomePage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
