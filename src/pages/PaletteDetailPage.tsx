@@ -75,19 +75,16 @@ const PaletteDetailPage: React.FC = () => {
           </Link>
         </div>
         
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="flex justify-between items-start mb-6">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-800 mb-2">{palette.title}</h1>
-              <p className="text-gray-600">
-                Created by {palette.author} on {new Date(palette.createdAt).toLocaleDateString()}
-              </p>
-            </div>
+        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-8 gap-4">
+            <h1 className="text-4xl font-bold text-gray-800 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+              {palette.title}
+            </h1>
             
             <div className="flex gap-3">
               <button 
                 onClick={handleDownload}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors text-gray-700"
+                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
               >
                 <Download size={18} />
                 <span>Download</span>
@@ -95,7 +92,7 @@ const PaletteDetailPage: React.FC = () => {
               
               <button 
                 onClick={handleShare}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors text-gray-700"
+                className="flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
               >
                 <Share size={18} />
                 <span>Share</span>
@@ -103,10 +100,10 @@ const PaletteDetailPage: React.FC = () => {
               
               <button 
                 onClick={handleLike}
-                className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
                   liked 
-                    ? 'bg-red-100 text-red-600' 
-                    : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                    ? 'bg-red-100 text-red-600 hover:bg-red-200' 
+                    : 'bg-gray-100 hover:bg-gray-200'
                 }`}
               >
                 <Heart size={18} className={liked ? 'fill-red-500' : ''} />
@@ -116,7 +113,7 @@ const PaletteDetailPage: React.FC = () => {
           </div>
           
           {shareLink && (
-            <div className="mb-6 p-3 bg-green-50 text-green-700 rounded-md flex justify-between items-center">
+            <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-lg flex justify-between items-center animate-fade-in">
               <span>Link copied to clipboard!</span>
               <button className="text-sm underline" onClick={() => setShareLink(null)}>
                 Dismiss
@@ -124,46 +121,47 @@ const PaletteDetailPage: React.FC = () => {
             </div>
           )}
           
-          <div className="flex flex-col md:flex-row gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
             {palette.colors.map(color => (
               <ColorSwatch key={color.hex} color={color} large />
             ))}
           </div>
           
-          <div className="mb-4">
-            <h2 className="text-lg font-medium text-gray-800 mb-3">Tags</h2>
-            <div className="flex flex-wrap gap-2">
-              {palette.tags.map(tag => (
-                <span 
-                  key={tag}
-                  className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
-                >
-                  {tag}
-                </span>
-              ))}
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-lg font-medium text-gray-800 mb-3">Tags</h2>
+              <div className="flex flex-wrap gap-2">
+                {palette.tags.map(tag => (
+                  <Link
+                    to={`/tags/${tag}`}
+                    key={tag}
+                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors"
+                  >
+                    {tag}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        </div>
-        
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h2 className="text-xl font-medium text-gray-800 mb-4">How to Use</h2>
-          
-          <div className="mb-4">
-            <h3 className="text-lg font-medium text-gray-700 mb-2">CSS Variables</h3>
-            <div className="bg-gray-50 p-4 rounded-md overflow-x-auto">
-              <pre className="text-sm font-mono">
-                {`:root {
+
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold text-gray-800">How to Use</h2>
+              
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium text-gray-700">CSS Variables</h3>
+                <div className="bg-gray-50 p-6 rounded-lg overflow-x-auto">
+                  <pre className="text-sm font-mono">
+                    {`:root {
 ${palette.colors.map((color, index) => `  --color-${index + 1}: ${color.hex};`).join('\n')}
 }`}
-              </pre>
-            </div>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-2">Tailwind Config</h3>
-            <div className="bg-gray-50 p-4 rounded-md overflow-x-auto">
-              <pre className="text-sm font-mono">
-                {`module.exports = {
+                  </pre>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium text-gray-700">Tailwind Config</h3>
+                <div className="bg-gray-50 p-6 rounded-lg overflow-x-auto">
+                  <pre className="text-sm font-mono">
+                    {`module.exports = {
   theme: {
     extend: {
       colors: {
@@ -172,7 +170,9 @@ ${palette.colors.map((color, index) => `        color${index + 1}: '${color.hex}
     }
   }
 }`}
-              </pre>
+                  </pre>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -182,3 +182,4 @@ ${palette.colors.map((color, index) => `        color${index + 1}: '${color.hex}
 };
 
 export default PaletteDetailPage;
+
