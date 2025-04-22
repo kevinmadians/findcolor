@@ -1,4 +1,3 @@
-
 // Mock data for color palettes
 export interface Color {
   hex: string;
@@ -30,45 +29,48 @@ export const categories = [
 export const palettes: Palette[] = [
   {
     id: '1',
-    title: 'Summer Sunset',
+    title: 'Ocean Breeze',
     colors: [
-      { hex: '#FF9A8B', name: 'Salmon Pink' },
-      { hex: '#FF6B6B', name: 'Bittersweet' },
-      { hex: '#FFB347', name: 'Pastel Orange' },
-      { hex: '#FFC837', name: 'Sunglow' },
+      { hex: '#48CAE4', name: 'Blue Grotto' },
+      { hex: '#00B4D8', name: 'Pacific Blue' },
+      { hex: '#0096C7', name: 'Blue Green' },
+      { hex: '#0077B6', name: 'Star Command Blue' },
+      { hex: '#023E8A', name: 'Royal Blue Dark' }
     ],
-    likes: 256,
-    tags: ['warm', 'vibrant', 'sunset'],
-    createdAt: '2023-05-12',
-    author: 'ColorLover',
+    likes: 342,
+    tags: ['cool', 'blue', 'ocean'],
+    createdAt: '2024-04-20',
+    author: 'ColorMaster'
   },
   {
     id: '2',
-    title: 'Ocean Breeze',
+    title: 'Sunset Dream',
     colors: [
-      { hex: '#48AAAD', name: 'Cadet Blue' },
-      { hex: '#5B9BC9', name: 'Steel Blue' },
-      { hex: '#9BC1BC', name: 'Opal' },
-      { hex: '#BFD7EA', name: 'Beau Blue' },
+      { hex: '#FF8C42', name: 'Mango Tango' },
+      { hex: '#FF5733', name: 'Orange Red' },
+      { hex: '#C70039', name: 'Ruby Red' },
+      { hex: '#900C3F', name: 'Purple' },
+      { hex: '#581845', name: 'Dark Purple' }
     ],
-    likes: 189,
-    tags: ['cool', 'calm', 'blue'],
-    createdAt: '2023-06-18',
-    author: 'WaveDesigner',
+    likes: 287,
+    tags: ['warm', 'sunset', 'vibrant'],
+    createdAt: '2024-04-20',
+    author: 'SunsetLover'
   },
   {
     id: '3',
-    title: 'Forest Dream',
+    title: 'Spring Pastels',
     colors: [
-      { hex: '#D0E3CC', name: 'Tea Green' },
-      { hex: '#7CA982', name: 'Russian Green' },
-      { hex: '#5D5E60', name: 'Davys Grey' },
-      { hex: '#324851', name: 'Charcoal' },
+      { hex: '#FFD6E0', name: 'Pink Lace' },
+      { hex: '#FFEFCF', name: 'Blanched Almond' },
+      { hex: '#E1F8DC', name: 'Nyanza' },
+      { hex: '#D4E5F5', name: 'Light Blue' },
+      { hex: '#E8DFF5', name: 'Lavender' }
     ],
-    likes: 142,
-    tags: ['green', 'nature', 'calm'],
-    createdAt: '2023-07-24',
-    author: 'EcoArtist',
+    likes: 265,
+    tags: ['pastel', 'light', 'spring'],
+    createdAt: '2024-04-20',
+    author: 'PastelPro'
   },
   {
     id: '4',
