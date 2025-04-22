@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent } from 'react';
 import { Upload, FileImage } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import ColorSwatch from '@/components/ColorSwatch';
-import { Color } from '@/types/palette';
+import { Color } from '@/data/palettes/index';
 
 const ExtractFromImagePage = () => {
   const [colors, setColors] = useState<Color[]>([]);
@@ -22,10 +22,10 @@ const ExtractFromImagePage = () => {
           // Mock extraction of colors
           setTimeout(() => {
             setColors([
-              { hex: '#4A6D7C' },
-              { hex: '#CDA34F' },
-              { hex: '#E7E6F7' },
-              { hex: '#3D3B30' },
+              { hex: '#4A6D7C', name: 'Extracted Color 1' },
+              { hex: '#CDA34F', name: 'Extracted Color 2' },
+              { hex: '#E7E6F7', name: 'Extracted Color 3' },
+              { hex: '#3D3B30', name: 'Extracted Color 4' },
             ]);
           }, 500);
         }

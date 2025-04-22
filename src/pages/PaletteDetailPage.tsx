@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import ColorSwatch from '@/components/ColorSwatch';
 import { palettes, Palette } from '@/data/palettes';
 import { Download, Share, Heart } from 'lucide-react';
@@ -73,23 +74,29 @@ const PaletteDetailPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       
-      <main className="max-w-5xl mx-auto px-4 py-8">
-        <div className="mb-6">
-          <Link to="/" className="text-blue-600 hover:underline">
-            &larr; Back to palettes
+      <main className="max-w-5xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
+        <div className="flex justify-center mb-6">
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm sm:text-base text-gray-700 bg-white hover:bg-gray-50 rounded-lg shadow-sm transition-colors border"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Palettes
           </Link>
         </div>
         
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
+        <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 mb-8">
           <div className="flex flex-col items-center mb-8">
-            <h1 className="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
               {palette.title}
             </h1>
             
-            <div className="flex gap-3">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
               <button 
                 onClick={handleDownload}
-                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
+                className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg text-sm sm:text-base"
               >
                 <Download size={18} />
                 <span>Download</span>
@@ -97,7 +104,7 @@ const PaletteDetailPage: React.FC = () => {
               
               <button 
                 onClick={handleShare}
-                className="flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all"
+                className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all text-sm sm:text-base"
               >
                 <Share size={18} />
                 <span>Share</span>
@@ -105,7 +112,7 @@ const PaletteDetailPage: React.FC = () => {
               
               <button 
                 onClick={handleLike}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all text-sm sm:text-base ${
                   liked 
                     ? 'bg-red-100 text-red-600 hover:bg-red-200' 
                     : 'bg-gray-100 hover:bg-gray-200'
@@ -117,7 +124,7 @@ const PaletteDetailPage: React.FC = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
             {palette.colors.map(color => (
               <ColorSwatch key={color.hex} color={color} large />
             ))}
@@ -131,7 +138,7 @@ const PaletteDetailPage: React.FC = () => {
                   <Link
                     to={`/tags/${tag}`}
                     key={tag}
-                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors"
+                    className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-100 text-gray-700 rounded-full text-xs sm:text-sm hover:bg-gray-200 transition-colors"
                   >
                     {tag}
                   </Link>
@@ -139,40 +146,11 @@ const PaletteDetailPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-800 text-center">How to Use</h2>
-              
-              <div className="space-y-4">
-                <h3 className="text-lg font-medium text-gray-700">CSS Variables</h3>
-                <div className="bg-gray-50 p-6 rounded-lg overflow-x-auto">
-                  <pre className="text-sm font-mono">
-                    {`:root {
-${palette.colors.map((color, index) => `  --color-${index + 1}: ${color.hex};`).join('\n')}
-}`}
-                  </pre>
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                <h3 className="text-lg font-medium text-gray-700">Tailwind Config</h3>
-                <div className="bg-gray-50 p-6 rounded-lg overflow-x-auto">
-                  <pre className="text-sm font-mono">
-                    {`module.exports = {
-  theme: {
-    extend: {
-      colors: {
-${palette.colors.map((color, index) => `        color${index + 1}: '${color.hex}',`).join('\n')}
-      }
-    }
-  }
-}`}
-                  </pre>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

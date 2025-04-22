@@ -5,16 +5,16 @@ import { Route, Palette } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="bg-white shadow-sm py-4 px-4 md:px-8">
+    <nav className="bg-white shadow-sm py-3 sm:py-4 px-3 sm:px-4 md:px-8">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
-        <div className="flex items-center gap-2 mb-4 md:mb-0">
+        <div className="flex items-center gap-2 mb-3 sm:mb-4 md:mb-0">
           <div className="flex space-x-1">
-            <span className="h-6 w-6 rounded-full bg-blue-500"></span>
-            <span className="h-6 w-6 rounded-full bg-green-500"></span>
-            <span className="h-6 w-6 rounded-full bg-purple-500"></span>
-            <span className="h-6 w-6 rounded-full bg-yellow-500"></span>
+            <span className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-blue-500"></span>
+            <span className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-green-500"></span>
+            <span className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-purple-500"></span>
+            <span className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-yellow-500"></span>
           </div>
-          <Link to="/" className="text-2xl font-bold text-gray-800">
+          <Link to="/" className="text-xl sm:text-2xl font-bold text-gray-800">
             Find<span className="text-blue-500">Color</span>
           </Link>
         </div>
@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      <div className="md:hidden mt-4 flex justify-center space-x-6">
+      <div className="md:hidden mt-3 flex justify-center space-x-6">
         <Link to="/explore" className="text-gray-700 hover:text-blue-600 font-medium flex items-center gap-2">
           <Route className="w-4 h-4" />
           Explore

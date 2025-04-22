@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import { Plus, Trash, Upload } from 'lucide-react';
-import { Color } from '@/types/palette';
+import { Color } from '@/data/palettes';
 
 const MAX_COLORS = 5;
 

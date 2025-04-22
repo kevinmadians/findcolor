@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Palette } from '@/types/palette';
+import { Palette } from '@/data/palettes/index';
 import { Copy, Heart } from 'lucide-react';
 
 interface ColorCardProps {
@@ -28,8 +28,8 @@ const ColorCard: React.FC<ColorCardProps> = ({ palette }) => {
 
   return (
     <Link to={`/palette/${palette.id}`} className="group">
-      <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-        <div className="h-32 flex">
+      <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 w-full">
+        <div className="h-24 md:h-32 flex">
           {palette.colors.map((color) => (
             <div
               key={color.hex}
@@ -50,9 +50,9 @@ const ColorCard: React.FC<ColorCardProps> = ({ palette }) => {
             </div>
           ))}
         </div>
-        <div className="p-4">
+        <div className="p-3 md:p-4">
           <div className="flex justify-between items-center">
-            <h3 className="font-medium text-gray-800">{palette.title}</h3>
+            <h3 className="font-medium text-gray-800 text-sm md:text-base">{palette.title}</h3>
             <button 
               onClick={toggleLike}
               className="group/like"
@@ -66,7 +66,7 @@ const ColorCard: React.FC<ColorCardProps> = ({ palette }) => {
             {palette.tags.slice(0, 3).map((tag) => (
               <span 
                 key={tag} 
-                className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded"
+                className="text-xs bg-gray-100 text-gray-700 px-1.5 py-0.5 md:px-2 md:py-1 rounded"
               >
                 {tag}
               </span>

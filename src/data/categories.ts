@@ -1,5 +1,5 @@
 
-import { Category } from '@/types/palette';
+import { Category } from '@/data/palettes/index';
 
 export const categories: Category[] = [
   { id: 'all', name: 'All' },
