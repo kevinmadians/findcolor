@@ -1,30 +1,4 @@
-// Mock data for color palettes
-export interface Color {
-  hex: string;
-  rgb?: string;
-  name?: string;
-}
-
-export interface Palette {
-  id: string;
-  title: string;
-  colors: Color[];
-  likes: number;
-  tags: string[];
-  createdAt: string;
-  author: string;
-}
-
-export const categories = [
-  { id: 'all', name: 'All' },
-  { id: 'warm', name: 'Warm' },
-  { id: 'cool', name: 'Cool' },
-  { id: 'pastel', name: 'Pastel' },
-  { id: 'vibrant', name: 'Vibrant' },
-  { id: 'dark', name: 'Dark' },
-  { id: 'light', name: 'Light' },
-  { id: 'monochrome', name: 'Monochrome' },
-];
+import { Palette } from '@/types/palette';
 
 export const palettes: Palette[] = [
   {
@@ -311,12 +285,3 @@ export const palettes: Palette[] = [
     author: 'IslandVibes',
   }
 ];
-
-export function hexToRgb(hex: string): string {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  if (!result) return '';
-  const r = parseInt(result[1], 16);
-  const g = parseInt(result[2], 16);
-  const b = parseInt(result[3], 16);
-  return `rgb(${r}, ${g}, ${b})`;
-}

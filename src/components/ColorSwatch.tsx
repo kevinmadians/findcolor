@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { Copy } from 'lucide-react';
-import { Color, hexToRgb } from '@/data/palettes';
+import { Color } from '@/types/palette';
+import { hexToRgb } from '@/utils/colorUtils';
 
 interface ColorSwatchProps {
   color: Color;

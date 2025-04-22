@@ -5,7 +5,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PaletteGrid from '@/components/PaletteGrid';
 import { Badge } from "@/components/ui/badge";
-import { palettes, categories } from '@/data/palettes';
+import { palettes } from '@/data/palettesData';
+import { categories } from '@/data/categories';
 import { Link } from 'react-router-dom';
 import { Tag } from 'lucide-react';
 
