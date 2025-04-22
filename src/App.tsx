@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +9,7 @@ import PaletteDetailPage from "./pages/PaletteDetailPage";
 import CreatePalettePage from "./pages/CreatePalettePage";
 import NotFound from "./pages/NotFound";
 import ExtractFromImagePage from "./pages/ExtractFromImagePage";
+import ExplorePage from "./pages/ExplorePage";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +21,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/tags/:tag" element={<ExplorePage />} />
           <Route path="/palette/:id" element={<PaletteDetailPage />} />
           <Route path="/create" element={<CreatePalettePage />} />
           <Route path="/extract-from-image" element={<ExtractFromImagePage />} />

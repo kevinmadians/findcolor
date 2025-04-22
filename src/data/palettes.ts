@@ -253,6 +253,62 @@ export const palettes: Palette[] = [
     tags: ['blue', 'cool', 'ocean'],
     createdAt: '2024-03-28',
     author: 'WaveRider'
+  },
+  {
+    id: '17',
+    title: 'Arctic Aurora',
+    colors: [
+      { hex: '#012030', name: 'Deep Night' },
+      { hex: '#13678A', name: 'Aurora Blue' },
+      { hex: '#45C4B0', name: 'Ice Mint' },
+      { hex: '#9AEBA3', name: 'Northern Lights' },
+    ],
+    likes: 245,
+    tags: ['dark', 'cold', 'winter', 'night'],
+    createdAt: '2024-04-01',
+    author: 'ArcticDreamer',
+  },
+  {
+    id: '18',
+    title: 'Desert Morning',
+    colors: [
+      { hex: '#FF9F1C', name: 'Morning Sun' },
+      { hex: '#E71D36', name: 'Desert Rose' },
+      { hex: '#2EC4B6', name: 'Cactus' },
+      { hex: '#FDFFFC', name: 'Desert Sand' },
+    ],
+    likes: 189,
+    tags: ['warm', 'morning', 'desert', 'bright'],
+    createdAt: '2024-04-05',
+    author: 'SunrisePalette',
+  },
+  {
+    id: '19',
+    title: 'Urban Night',
+    colors: [
+      { hex: '#2B2D42', name: 'City Night' },
+      { hex: '#8D99AE', name: 'Urban Gray' },
+      { hex: '#EDF2F4', name: 'Street Light' },
+      { hex: '#EF233C', name: 'Neon Sign' },
+    ],
+    likes: 167,
+    tags: ['dark', 'urban', 'night', 'modern'],
+    createdAt: '2024-04-08',
+    author: 'CityNights',
+  },
+  {
+    id: '20',
+    title: 'Tropical Paradise',
+    colors: [
+      { hex: '#00B4D8', name: 'Ocean Blue' },
+      { hex: '#2FBF71', name: 'Palm Tree' },
+      { hex: '#F9C74F', name: 'Beach Sand' },
+      { hex: '#F8961E', name: 'Sunset' },
+    ],
+    likes: 221,
+    tags: ['bright', 'summer', 'tropical', 'warm'],
+    createdAt: '2024-04-10',
+    author: 'IslandVibes',
   }
 ];
 

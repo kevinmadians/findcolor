@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Route, Palette } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   return (
@@ -18,21 +19,25 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
         
-        <div className="hidden md:flex items-center space-x-4">
-          <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium">
+        <div className="hidden md:flex items-center space-x-6">
+          <Link to="/explore" className="text-gray-700 hover:text-blue-600 font-medium flex items-center gap-2">
+            <Route className="w-4 h-4" />
             Explore
           </Link>
-          <Link to="/create" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md font-medium transition duration-200">
+          <Link to="/create" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md font-medium transition duration-200 flex items-center gap-2">
+            <Palette className="w-4 h-4" />
             Create
           </Link>
         </div>
       </div>
       
       <div className="md:hidden mt-4 flex justify-center space-x-6">
-        <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium">
+        <Link to="/explore" className="text-gray-700 hover:text-blue-600 font-medium flex items-center gap-2">
+          <Route className="w-4 h-4" />
           Explore
         </Link>
-        <Link to="/create" className="text-gray-700 hover:text-blue-600 font-medium">
+        <Link to="/create" className="text-gray-700 hover:text-blue-600 font-medium flex items-center gap-2">
+          <Palette className="w-4 h-4" />
           Create
         </Link>
       </div>
