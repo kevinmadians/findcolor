@@ -1,16 +1,17 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Palette } from '@/data/palettes';
 import { Copy, Heart } from 'lucide-react';
+import { usePaletteLike } from '@/hooks/usePaletteLike';
+import { Palette } from '@/data/palettes';
 
 interface ColorCardProps {
   palette: Palette;
 }
 
 const ColorCard: React.FC<ColorCardProps> = ({ palette }) => {
-  const [liked, setLiked] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
+  const { mutate: toggleLike } = usePaletteLike();
 
   const copyToClipboard = (color: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -20,10 +21,10 @@ const ColorCard: React.FC<ColorCardProps> = ({ palette }) => {
     setTimeout(() => setCopied(null), 1500);
   };
 
-  const toggleLike = (e: React.MouseEvent) => {
+  const handleLike = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setLiked(!liked);
+    toggleLike({ paletteId: palette.id });
   };
 
   return (
@@ -51,29 +52,28 @@ const ColorCard: React.FC<ColorCardProps> = ({ palette }) => {
           ))}
         </div>
         <div className="p-4">
-          <div className="flex justify-between items-center">
-            <h3 className="font-medium text-gray-800">{palette.title}</h3>
+          <div className="flex justify-between items-center mb-2">
+            <div className="flex gap-2 flex-wrap">
+              {palette.tags.map((tag) => (
+                <Link 
+                  key={tag}
+                  to={`/tags/${tag}`}
+                  className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded hover:bg-gray-200 transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {tag}
+                </Link>
+              ))}
+            </div>
             <button 
-              onClick={toggleLike}
+              onClick={handleLike}
               className="group/like"
             >
               <Heart 
-                className={`h-5 w-5 ${liked ? 'fill-red-500 text-red-500' : 'text-gray-400 group-hover/like:text-red-500'}`} 
+                className={`h-5 w-5 ${palette.likes > 0 ? 'fill-red-500 text-red-500' : 'text-gray-400 group-hover/like:text-red-500'}`}
               />
+              <span className="ml-1 text-sm text-gray-500">{palette.likes}</span>
             </button>
-          </div>
-          <div className="mt-2 flex gap-2 flex-wrap">
-            {palette.tags.slice(0, 3).map((tag) => (
-              <span 
-                key={tag} 
-                className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <div className="mt-3 text-xs text-gray-500">
-            {palette.likes} likes
           </div>
         </div>
       </div>

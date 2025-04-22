@@ -9,7 +9,65 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      palette_likes: {
+        Row: {
+          created_at: string
+          id: string
+          palette_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          palette_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          palette_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "palette_likes_palette_id_fkey"
+            columns: ["palette_id"]
+            isOneToOne: false
+            referencedRelation: "palettes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      palettes: {
+        Row: {
+          colors: Json
+          created_at: string
+          id: string
+          likes: number | null
+          tags: string[]
+          title: string
+          user_id: string | null
+        }
+        Insert: {
+          colors: Json
+          created_at?: string
+          id?: string
+          likes?: number | null
+          tags?: string[]
+          title: string
+          user_id?: string | null
+        }
+        Update: {
+          colors?: Json
+          created_at?: string
+          id?: string
+          likes?: number | null
+          tags?: string[]
+          title?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
