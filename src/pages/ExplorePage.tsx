@@ -9,6 +9,7 @@ import { palettes } from '@/data/palettes/index';
 import { categories } from '@/data/categories';
 import { Link } from 'react-router-dom';
 import { Tag } from 'lucide-react';
+import { getLikesCountBatch } from '@/lib/supabase';
 
 const ITEMS_PER_PAGE = 20;
 
@@ -19,12 +20,13 @@ const ExplorePage = () => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [likesMap, setLikesMap] = useState<Record<string, number>>({});
 
   const allTags = [...new Set(palettes.flatMap(palette => palette.tags))];
   
   const filteredPalettes = tag
     ? palettes.filter(palette => palette.tags.includes(tag))
-    : palettes;
+    : [...palettes].sort((a, b) => (likesMap[b.id] || 0) - (likesMap[a.id] || 0));
 
   const loadMore = React.useCallback(() => {
     if (loading) return;
@@ -42,6 +44,19 @@ const ExplorePage = () => {
       setPage(prev => prev + 1);
     }, 800);
   }, [page, filteredPalettes, loading]);
+
+  // Initial likes fetch
+  useEffect(() => {
+    const fetchLikes = async () => {
+      try {
+        const likes = await getLikesCountBatch(palettes.map(p => p.id));
+        setLikesMap(likes);
+      } catch (error) {
+        console.error('Error fetching likes:', error);
+      }
+    };
+    fetchLikes();
+  }, []);
 
   // Reset when tag changes
   useEffect(() => {

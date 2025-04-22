@@ -7,26 +7,65 @@ import ColorSwatch from '@/components/ColorSwatch';
 import { palettes, Palette } from '@/data/palettes';
 import { Download, Share, Heart } from 'lucide-react';
 import { toast } from "@/components/ui/sonner";
+import { getLikesCount, incrementLikes, hasUserLikedPalette, onLikesUpdate } from '@/lib/supabase';
 
 const PaletteDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [palette, setPalette] = useState<Palette | null>(null);
-  const [liked, setLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
+  const [hasLiked, setHasLiked] = useState(false);
 
   useEffect(() => {
     if (id) {
       const found = palettes.find(p => p.id === id);
       if (found) {
         setPalette(found);
+        // Fetch initial likes count and check if user has liked
+        Promise.all([
+          getLikesCount(id),
+          hasUserLikedPalette(id)
+        ]).then(([count, liked]) => {
+          setLikesCount(count);
+          setHasLiked(liked);
+        });
+
+        // Subscribe to real-time updates
+        const cleanup = onLikesUpdate((updatedPaletteId, newCount) => {
+          if (updatedPaletteId === id) {
+            setLikesCount(newCount);
+          }
+        });
+
+        return () => {
+          cleanup();
+        };
       }
     }
   }, [id]);
 
-  const handleLike = () => {
-    setLiked(!liked);
-    toast(liked ? 'Removed from favorites' : 'Added to favorites', {
-      duration: 1500,
-    });
+  const handleLike = async () => {
+    if (!id || hasLiked) return;
+    
+    try {
+      const newCount = await incrementLikes(id);
+      setLikesCount(newCount);
+      setHasLiked(true);
+      toast('Added to favorites', {
+        duration: 1500,
+      });
+    } catch (error) {
+      if (error instanceof Error && error.message === 'User has already liked this palette') {
+        setHasLiked(true);
+        toast('You have already liked this palette', {
+          duration: 1500,
+        });
+      } else {
+        console.error('Error updating likes:', error);
+        toast('Failed to update likes', {
+          duration: 1500,
+        });
+      }
+    }
   };
 
   const handleShare = () => {
@@ -113,13 +152,14 @@ const PaletteDetailPage: React.FC = () => {
               <button 
                 onClick={handleLike}
                 className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all text-sm sm:text-base ${
-                  liked 
-                    ? 'bg-red-100 text-red-600 hover:bg-red-200' 
+                  hasLiked 
+                    ? 'bg-red-100 text-red-600' 
                     : 'bg-gray-100 hover:bg-gray-200'
                 }`}
+                disabled={hasLiked}
               >
-                <Heart size={18} className={liked ? 'fill-red-500' : ''} />
-                <span>{palette.likes + (liked ? 1 : 0)}</span>
+                <Heart size={18} className={hasLiked ? 'fill-red-500' : ''} />
+                <span>{likesCount} likes</span>
               </button>
             </div>
           </div>
