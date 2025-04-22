@@ -1,10 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PaletteGrid from '@/components/PaletteGrid';
 import CategoryFilter from '@/components/CategoryFilter';
 import { palettes, Palette } from '@/data/palettes';
-import { Album, Heart, Paintbrush } from 'lucide-react';
 
 const HomePage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -40,13 +40,9 @@ const HomePage: React.FC = () => {
     setFilteredPalettes(filtered);
   }, [selectedCategory, searchTerm]);
 
-  const handleSearch = (term: string) => {
-    setSearchTerm(term);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
-      <Navbar onSearch={handleSearch} />
+      <Navbar />
       
       <main className={`flex-grow max-w-7xl mx-auto px-4 py-8 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="mb-12 text-center">
