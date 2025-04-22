@@ -5,12 +5,12 @@ import Navbar from '@/components/Navbar';
 import ColorSwatch from '@/components/ColorSwatch';
 import { palettes, Palette } from '@/data/palettes';
 import { Download, Share, Heart } from 'lucide-react';
+import { toast } from "@/components/ui/sonner";
 
 const PaletteDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [palette, setPalette] = useState<Palette | null>(null);
   const [liked, setLiked] = useState(false);
-  const [shareLink, setShareLink] = useState<string | null>(null);
 
   useEffect(() => {
     if (id) {
@@ -23,24 +23,26 @@ const PaletteDetailPage: React.FC = () => {
 
   const handleLike = () => {
     setLiked(!liked);
+    toast(liked ? 'Removed from favorites' : 'Added to favorites', {
+      duration: 1500,
+    });
   };
 
   const handleShare = () => {
     const url = window.location.href;
     navigator.clipboard.writeText(url);
-    setShareLink(url);
-    setTimeout(() => setShareLink(null), 3000);
+    toast('Link copied to clipboard!', {
+      duration: 1500,
+    });
   };
 
   const handleDownload = () => {
     if (!palette) return;
     
-    // Create CSS content
     const cssContent = palette.colors.map(color => 
       `--color-${palette.colors.indexOf(color) + 1}: ${color.hex};`
     ).join('\n');
 
-    // Create file and download
     const element = document.createElement('a');
     const file = new Blob([`:root {\n${cssContent}\n}`], {type: 'text/css'});
     element.href = URL.createObjectURL(file);
@@ -48,6 +50,9 @@ const PaletteDetailPage: React.FC = () => {
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
+    toast('CSS file downloaded!', {
+      duration: 1500,
+    });
   };
 
   if (!palette) {
@@ -68,16 +73,16 @@ const PaletteDetailPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       
-      <main className="max-w-7xl mx-auto px-4 py-8">
+      <main className="max-w-5xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Link to="/" className="text-blue-600 hover:underline">
             &larr; Back to palettes
           </Link>
         </div>
         
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-8 gap-4">
-            <h1 className="text-4xl font-bold text-gray-800 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+        <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <div className="flex flex-col items-center mb-8">
+            <h1 className="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
               {palette.title}
             </h1>
             
@@ -112,15 +117,6 @@ const PaletteDetailPage: React.FC = () => {
             </div>
           </div>
           
-          {shareLink && (
-            <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-lg flex justify-between items-center animate-fade-in">
-              <span>Link copied to clipboard!</span>
-              <button className="text-sm underline" onClick={() => setShareLink(null)}>
-                Dismiss
-              </button>
-            </div>
-          )}
-          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
             {palette.colors.map(color => (
               <ColorSwatch key={color.hex} color={color} large />
@@ -128,9 +124,9 @@ const PaletteDetailPage: React.FC = () => {
           </div>
           
           <div className="space-y-8">
-            <div>
+            <div className="text-center">
               <h2 className="text-lg font-medium text-gray-800 mb-3">Tags</h2>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap justify-center gap-2">
                 {palette.tags.map(tag => (
                   <Link
                     to={`/tags/${tag}`}
@@ -144,7 +140,7 @@ const PaletteDetailPage: React.FC = () => {
             </div>
 
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-800">How to Use</h2>
+              <h2 className="text-2xl font-bold text-gray-800 text-center">How to Use</h2>
               
               <div className="space-y-4">
                 <h3 className="text-lg font-medium text-gray-700">CSS Variables</h3>
@@ -182,4 +178,3 @@ ${palette.colors.map((color, index) => `        color${index + 1}: '${color.hex}
 };
 
 export default PaletteDetailPage;
-
