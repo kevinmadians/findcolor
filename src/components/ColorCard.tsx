@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Copy, Heart } from 'lucide-react';
 import { usePaletteLike } from '@/hooks/usePaletteLike';
