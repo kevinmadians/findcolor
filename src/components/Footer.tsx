@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Palette, SwatchBook, ColorPicker } from 'lucide-react';
+import { Palette, SwatchBook, Brush } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -35,7 +35,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/create" className="hover:text-blue-500 flex items-center gap-2">
-                  <ColorPicker className="w-4 h-4" />
+                  <Brush className="w-4 h-4" />
                   Create Custom
                 </Link>
               </li>
