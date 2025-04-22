@@ -12,8 +12,8 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   onSelectCategory,
 }) => {
   return (
-    <div className="w-full overflow-x-auto pb-2 mb-6">
-      <div className="flex gap-3 min-w-max">
+    <div className="w-full overflow-x-auto pb-2 mb-8">
+      <div className="flex gap-3 justify-center min-w-max mx-auto max-w-3xl">
         {categories.map((category) => (
           <button
             key={category.id}

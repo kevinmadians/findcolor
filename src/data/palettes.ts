@@ -198,6 +198,62 @@ export const palettes: Palette[] = [
     createdAt: '2024-03-18',
     author: 'CitrusLover',
   },
+  {
+    id: '13',
+    title: 'Desert Sunset',
+    colors: [
+      { hex: '#FF7E5F', name: 'Coral' },
+      { hex: '#FEB47B', name: 'Peach' },
+      { hex: '#FFE66D', name: 'Sand' },
+      { hex: '#7BC8A4', name: 'Sage' }
+    ],
+    likes: 156,
+    tags: ['warm', 'sunset', 'desert'],
+    createdAt: '2024-03-25',
+    author: 'DesertDreamer'
+  },
+  {
+    id: '14',
+    title: 'Nordic Frost',
+    colors: [
+      { hex: '#E2F0F9', name: 'Ice Blue' },
+      { hex: '#B0C4DE', name: 'Steel Blue' },
+      { hex: '#98A6B5', name: 'Slate' },
+      { hex: '#7D8491', name: 'Storm Gray' }
+    ],
+    likes: 189,
+    tags: ['cool', 'minimal', 'winter'],
+    createdAt: '2024-03-26',
+    author: 'FrostMaker'
+  },
+  {
+    id: '15',
+    title: 'Forest Dreams',
+    colors: [
+      { hex: '#2D5A27', name: 'Pine' },
+      { hex: '#4A7856', name: 'Moss' },
+      { hex: '#95B46A', name: 'Fern' },
+      { hex: '#D0D6B3', name: 'Sage Light' }
+    ],
+    likes: 167,
+    tags: ['nature', 'green', 'forest'],
+    createdAt: '2024-03-27',
+    author: 'NatureArt'
+  },
+  {
+    id: '16',
+    title: 'Ocean Depths',
+    colors: [
+      { hex: '#01263F', name: 'Deep Blue' },
+      { hex: '#0C4B6E', name: 'Ocean Blue' },
+      { hex: '#116A94', name: 'Sea Blue' },
+      { hex: '#2D8BB6', name: 'Sky Blue' }
+    ],
+    likes: 201,
+    tags: ['blue', 'cool', 'ocean'],
+    createdAt: '2024-03-28',
+    author: 'WaveRider'
+  }
 ];
 
 export function hexToRgb(hex: string): string {
